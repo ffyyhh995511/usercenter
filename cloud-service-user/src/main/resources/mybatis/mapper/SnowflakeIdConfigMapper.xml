@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloud.usercenter.mapper.SnowflakeIdConfigMapper">
+  <resultMap id="BaseResultMap" type="org.cloud.usercenter.entity.SnowflakeIdConfig">
+    <id column="mac" jdbcType="VARCHAR" property="mac" />
+    <result column="datacenter_id" jdbcType="INTEGER" property="datacenterId" />
+    <result column="worker_id" jdbcType="INTEGER" property="workerId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mac, datacenter_id, worker_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from snowflake_id_config
+    where mac = #{mac,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from snowflake_id_config
+    where mac = #{mac,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.usercenter.entity.SnowflakeIdConfig">
+    insert into snowflake_id_config (mac, datacenter_id, worker_id, 
+      create_time)
+    values (#{mac,jdbcType=VARCHAR}, #{datacenterId,jdbcType=INTEGER}, #{workerId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.usercenter.entity.SnowflakeIdConfig">
+    insert into snowflake_id_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="datacenterId != null">
+        datacenter_id,
+      </if>
+      <if test="workerId != null">
+        worker_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="datacenterId != null">
+        #{datacenterId,jdbcType=INTEGER},
+      </if>
+      <if test="workerId != null">
+        #{workerId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.usercenter.entity.SnowflakeIdConfig">
+    update snowflake_id_config
+    <set>
+      <if test="datacenterId != null">
+        datacenter_id = #{datacenterId,jdbcType=INTEGER},
+      </if>
+      <if test="workerId != null">
+        worker_id = #{workerId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.usercenter.entity.SnowflakeIdConfig">
+    update snowflake_id_config
+    set datacenter_id = #{datacenterId,jdbcType=INTEGER},
+      worker_id = #{workerId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+</mapper>

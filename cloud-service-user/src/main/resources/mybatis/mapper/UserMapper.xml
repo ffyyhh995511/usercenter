@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloud.usercenter.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="org.cloud.usercenter.entity.User">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="token_expire" jdbcType="BIGINT" property="tokenExpire" />
+    <result column="resresh_token_expire" jdbcType="BIGINT" property="resreshTokenExpire" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_logout_time" jdbcType="TIMESTAMP" property="lastLogoutTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, username, password, telphone, email, status, token, refresh_token, token_expire, 
+    resresh_token_expire, create_time, last_login_time, last_logout_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.usercenter.entity.User">
+    insert into user (uid, username, password, 
+      telphone, email, status, 
+      token, refresh_token, token_expire, 
+      resresh_token_expire, create_time, last_login_time, 
+      last_logout_time)
+    values (#{uid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{telphone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{token,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, #{tokenExpire,jdbcType=BIGINT}, 
+      #{resreshTokenExpire,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{lastLogoutTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.usercenter.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="refreshToken != null">
+        refresh_token,
+      </if>
+      <if test="tokenExpire != null">
+        token_expire,
+      </if>
+      <if test="resreshTokenExpire != null">
+        resresh_token_expire,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastLogoutTime != null">
+        last_logout_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        #{tokenExpire,jdbcType=BIGINT},
+      </if>
+      <if test="resreshTokenExpire != null">
+        #{resreshTokenExpire,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLogoutTime != null">
+        #{lastLogoutTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.usercenter.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null">
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        token_expire = #{tokenExpire,jdbcType=BIGINT},
+      </if>
+      <if test="resreshTokenExpire != null">
+        resresh_token_expire = #{resreshTokenExpire,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLogoutTime != null">
+        last_logout_time = #{lastLogoutTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.usercenter.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      token = #{token,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      token_expire = #{tokenExpire,jdbcType=BIGINT},
+      resresh_token_expire = #{resreshTokenExpire,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_logout_time = #{lastLogoutTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 自定义sql-->
+  
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    uid
+    from user
+    where username = #{username,jdbcType=VARCHAR} limit 0,1
+  </select>
+  
+  <select id="selectByUsernameAndPassword" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    uid,username,email,telphone,status
+    from user
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} limit 0,1
+  </select>
+  
+  
+</mapper>
