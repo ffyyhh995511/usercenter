@@ -3,6 +3,8 @@ package org.cloud.usercenter.util;
 import java.util.List;
 import java.util.Set;
 
+import org.cloud.usercenter.config.BusinessConfig;
+
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -22,10 +24,16 @@ public class RedisUtil {
 	
 	private static JedisPool jedisPool = null;
 	
-	private static final String RDDIS_IP = PropertiesUtil.getProperties("config/redis.properties", "redis-master-ip");
-	private static final int RDDIS_PORT = Integer.valueOf(PropertiesUtil.getProperties("config/redis.properties", "redis-master-port"));
-	private static final String REDIS_MASTER_AUTH = PropertiesUtil.getProperties("config/redis.properties", "redis-master-auth");
+//	private static String fileConfigPrefix = "config-"+BusinessConfig.env;
 	
+//	private static final String RDDIS_IP = PropertiesUtil.getProperties(fileConfigPrefix + "/common-config.properties", "redisMasterIp");
+//	private static final int RDDIS_PORT = Integer.valueOf(PropertiesUtil.getProperties(fileConfigPrefix + "/common-config.properties", "redisMasterPort"));
+//	private static final String REDIS_MASTER_AUTH = PropertiesUtil.getProperties(fileConfigPrefix + "/common-config.properties", "redisMasterAuth");
+	
+	private static final String RDDIS_IP = BusinessConfig.redisMasterIp;
+	private static final int RDDIS_PORT = Integer.parseInt(BusinessConfig.redisMasterPort);
+	private static final String REDIS_MASTER_AUTH = BusinessConfig.redisMasterAuth;
+
 	static{
 		config = new JedisPoolConfig();
 		//连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true

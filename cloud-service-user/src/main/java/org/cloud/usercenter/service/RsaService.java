@@ -6,6 +6,7 @@ package org.cloud.usercenter.service;
 import javax.annotation.PostConstruct;
 
 import org.cloud.usercenter.util.RsaUtil;
+import org.cloud.usercenter.config.BusinessConfig;
 import org.cloud.usercenter.util.ReadFileUtil;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RsaService {
-	private String privateKeyPath = "src/main/resources/rsa/id_rsa";
-	private String publicKeyPath = "src/main/resources/rsa/id_rsa.pub";;
+	private static String fileConfigPrefix = "config-"+BusinessConfig.env;
+	private String privateKeyPath = "src/main/resources/"+fileConfigPrefix+"/rsa/id_rsa";
+	private String publicKeyPath = "src/main/resources/"+fileConfigPrefix+"/rsa/id_rsa.pub";
 	private String privateKeyStr;
 	private String publicKeyStr;
 	
