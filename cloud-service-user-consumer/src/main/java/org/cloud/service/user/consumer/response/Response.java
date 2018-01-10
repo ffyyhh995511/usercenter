@@ -1,4 +1,4 @@
-package org.cloud.usercenter.response;
+package org.cloud.service.user.consumer.response;
 
 
 import lombok.Data;

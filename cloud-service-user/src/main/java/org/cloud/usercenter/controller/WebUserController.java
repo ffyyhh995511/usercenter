@@ -13,6 +13,7 @@ import org.cloud.usercenter.response.Response;
 import org.cloud.usercenter.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,7 @@ public class WebUserController {
 	 */
 	@RequestMapping(value="/up/login",method=RequestMethod.POST)
 	public Object upLogin(User user){
-		if(user == null || !StringUtils.isNoneBlank(user.getUsername(),user.getPassword())) {
+		if(!StringUtils.isNoneBlank(user.getUsername(),user.getPassword())) {
 			return Response.paramsCheckFailResponse("账号密码不能为空");
 		}
 		try {

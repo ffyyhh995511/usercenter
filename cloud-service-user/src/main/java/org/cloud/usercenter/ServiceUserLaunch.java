@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @MapperScan("org.cloud.usercenter.mapper")
 public class ServiceUserLaunch implements CommandLineRunner{

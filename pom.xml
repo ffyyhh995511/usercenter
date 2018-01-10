@@ -56,5 +56,6 @@
 	<modules>
 		<module>cloud-service-discovery</module>
 		<module>cloud-service-user</module>
+		<module>cloud-service-user-consumer</module>
 	</modules>
 </project>
