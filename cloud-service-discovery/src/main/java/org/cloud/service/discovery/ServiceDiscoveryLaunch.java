@@ -18,7 +18,7 @@ public class ServiceDiscoveryLaunch implements ApplicationListener<EmbeddedServl
     	new SpringApplicationBuilder(ServiceDiscoveryLaunch.class).web(true).run(args);
     	int port = event.getEmbeddedServletContainer().getPort();
     	log.info("注册中心启动.端口 {}",port);
-    }
+    } 
 
 	@Override
 	public void onApplicationEvent(EmbeddedServletContainerInitializedEvent event) {

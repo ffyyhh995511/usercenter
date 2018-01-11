@@ -270,31 +270,31 @@ public class RsaUtil {
         return plainTextData;
     }
     
-    public static void main(String[] args) {
-        Map<String, Object> keyMap;
-        try {
-            keyMap = initKey();
-            String publicKey = getPublicKey(keyMap);
-            System.out.println("公钥");
-            System.out.println(publicKey);
-            String privateKey = getPrivateKey(keyMap);
-            System.out.println("私钥");
-            System.out.println(privateKey);
-            
-            String str = "399963978312323072_fyh_1478523698547_4785";
-            System.out.println("明文数据："+str);
-            
-			RSAPublicKey loadPublicKeyByStr = loadPublicKeyByStr(publicKey);
-            byte[] encrypt = encrypt(loadPublicKeyByStr, str.getBytes("UTF-8"));
-            String encryptBASE64 = encryptBASE64(encrypt);
-            System.out.println("加密后的密文："+encryptBASE64);
-            
-            RSAPrivateKey loadPrivateKeyByStr = loadPrivateKeyByStr(privateKey);
-            byte[] decrypt = decrypt(loadPrivateKeyByStr, decryptBASE64(encryptBASE64));
-            String a = new String(decrypt,"UTF-8");
-            System.out.println("密文解密："+a);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        Map<String, Object> keyMap;
+//        try {
+//            keyMap = initKey();
+//            String publicKey = getPublicKey(keyMap);
+//            System.out.println("公钥");
+//            System.out.println(publicKey);
+//            String privateKey = getPrivateKey(keyMap);
+//            System.out.println("私钥");
+//            System.out.println(privateKey);
+//            
+//            String str = "399963978312323072_fyh_1478523698547_4785";
+//            System.out.println("明文数据："+str);
+//            
+//			RSAPublicKey loadPublicKeyByStr = loadPublicKeyByStr(publicKey);
+//            byte[] encrypt = encrypt(loadPublicKeyByStr, str.getBytes("UTF-8"));
+//            String encryptBASE64 = encryptBASE64(encrypt);
+//            System.out.println("加密后的密文："+encryptBASE64);
+//            
+//            RSAPrivateKey loadPrivateKeyByStr = loadPrivateKeyByStr(privateKey);
+//            byte[] decrypt = decrypt(loadPrivateKeyByStr, decryptBASE64(encryptBASE64));
+//            String a = new String(decrypt,"UTF-8");
+//            System.out.println("密文解密："+a);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -12,12 +12,12 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5Util {
 
-	public static void main(String[] args) throws NoSuchAlgorithmException {
-		String str = encryptionLowerCase("123456");
-		System.out.println("加密结果：" + str);
-		String str2 = encryptionUpperCase("123456");
-		System.out.println("加密结果：" + str2);
-	}
+//	public static void main(String[] args) throws NoSuchAlgorithmException {
+//		String str = encryptionLowerCase("123456");
+//		System.out.println("加密结果：" + str);
+//		String str2 = encryptionUpperCase("123456");
+//		System.out.println("加密结果：" + str2);
+//	}
 
 	/**
 	 * 小写

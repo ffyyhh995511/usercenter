@@ -24,6 +24,10 @@ public class BusinessConfig {
 	public static String redisMasterAuth;
 	
 	public static String env;
+	
+	public static String idRsa;
+	
+	public static String idRsaPub;
 	/**
 	 * @return the redisMasterIp
 	 */
@@ -72,6 +76,29 @@ public class BusinessConfig {
 	public void setEnv(String env) {
 		this.env = env;
 	}
-	
+	/**
+	 * @return the idRsa
+	 */
+	public static String getIdRsa() {
+		return idRsa;
+	}
+	/**
+	 * @param idRsa the idRsa to set
+	 */
+	public static void setIdRsa(String idRsa) {
+		BusinessConfig.idRsa = idRsa;
+	}
+	/**
+	 * @return the idRsaPub
+	 */
+	public static String getIdRsaPub() {
+		return idRsaPub;
+	}
+	/**
+	 * @param idRsaPub the idRsaPub to set
+	 */
+	public static void setIdRsaPub(String idRsaPub) {
+		BusinessConfig.idRsaPub = idRsaPub;
+	}
 	
 }

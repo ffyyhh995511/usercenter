@@ -16,6 +16,7 @@ import org.cloud.usercenter.entity.User;
 import org.cloud.usercenter.mapper.SnowflakeIdConfigMapper;
 import org.cloud.usercenter.mapper.UserMapper;
 import org.cloud.usercenter.response.Response;
+import org.cloud.usercenter.util.ComputerInfoUtil;
 import org.cloud.usercenter.util.MD5Util;
 import org.cloud.usercenter.util.RandomCodeUtil;
 import org.cloud.usercenter.util.RedisUtil;
@@ -49,7 +50,7 @@ public class UserService {
 
 	@PostConstruct
 	private void init() throws Exception {
-		mac = ServerMacUtil.getLocalMac();
+		mac = ComputerInfoUtil.getMacAddress();
 		SnowflakeIdConfig sfConfig = snowflakeIdConfigMapper.selectByPrimaryKey(mac);
 		snowflakeIdGenerator = new SnowflakeIdGenerator(sfConfig.getWorkerId(), sfConfig.getDatacenterId());
 	}

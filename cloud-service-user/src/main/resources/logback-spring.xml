@@ -49,11 +49,16 @@
 				<fileNamePattern>/u01/usercenter/log/CloudServiceUserLog/error/error.%d.log</fileNamePattern>
 			</rollingPolicy>
 		</appender>
+		
+		<root level="info">
+            <appender-ref ref="fileInfoLog" />
+			<appender-ref ref="fileErrorLog" />
+        </root>
 
-		<logger name="org.cloud.usercenter" level="INFO">
+		<!-- <logger name="org.cloud.usercenter" level="info">
 			<appender-ref ref="fileInfoLog" />
 			<appender-ref ref="fileErrorLog" />
-		</logger>
+		</logger> -->
 		
 	</springProfile>
 
