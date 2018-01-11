@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @MapperScan("org.cloud.usercenter.mapper")
 public class ServiceUserLaunch implements CommandLineRunner{
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceUserLaunch.class, args);
 	}
