@@ -13,21 +13,20 @@ import org.cloud.usercenter.response.Response;
 import org.cloud.usercenter.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * web版
+ * 用户统一登录、校验
  * @author:fangyunhe
  * @time:2018年1月4日 下午5:08:41
  */
 
 @Slf4j
 @RestController
-@RequestMapping(value="web/user")
-public class WebUserController {
+@RequestMapping(value="/user")
+public class UserController {
 	
 	@Resource
 	private UserService userService;
@@ -36,8 +35,8 @@ public class WebUserController {
 	 * 账号密码方式注册username、password
 	 * @return
 	 */
-	@RequestMapping(value="/up/register",method=RequestMethod.POST)
-	public Object upRegister(User user){
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	public Object register(User user){
 		if(user == null || !StringUtils.isNoneBlank(user.getUsername(),user.getPassword())) {
 			return Response.paramsCheckFailResponse("账号密码不能为空");
 		}
@@ -55,8 +54,8 @@ public class WebUserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="/up/login",method=RequestMethod.POST)
-	public Object upLogin(User user){
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public Object login(User user){
 		if(!StringUtils.isNoneBlank(user.getUsername(),user.getPassword())) {
 			return Response.paramsCheckFailResponse("账号密码不能为空");
 		}
@@ -67,6 +66,20 @@ public class WebUserController {
 			log.error("登录失败",e);
 		}
 		return Response.failedResponse("登录失败");
+	}
+	
+	/**
+	 * 退出
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="/logout",method=RequestMethod.POST)
+	public Object logout(){
+		try {
+		} catch (Exception e) {
+			log.error("退出失败",e);
+		}
+		return Response.failedResponse("退出失败");
 	}
 	
 }

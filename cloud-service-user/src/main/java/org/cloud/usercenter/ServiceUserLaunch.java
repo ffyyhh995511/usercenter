@@ -9,6 +9,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 用户统一注册、登录、校验
+ * 一个账号登录多个网站(同个一级域名下)、app
+ * 
  * @Description:TODO
  * @author:fangyunhe
  * @time:2018年1月4日 下午5:43:40

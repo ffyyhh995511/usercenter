@@ -15,34 +15,53 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * web版token(cookie)相关
  * @author:fangyunhe
  * @time:2018年1月8日 下午2:54:31
  */
 @Slf4j
 @RestController
-@RequestMapping(value="/web/token")
-public class WebTokenController {
+@RequestMapping(value="/check")
+public class CheckController {
 	
 	@Resource
 	TokenService tokenService;
 	
 	/**
-	 * web端校验token是否合法
+	 * 校验token是否合法
+	 * web端token(cookie)相关
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="/check",method=RequestMethod.GET)
+	@RequestMapping(value="/token",method=RequestMethod.GET)
 	public Object check(String token){
 		if(StringUtils.isBlank(token)) {
 			return Response.paramsCheckFailResponse("参数不合法");
 		}
 		try {
-			Object result = tokenService.checkWebToken(token);
+			Object result = tokenService.checkToken(token);
 			return result;
 		} catch (Exception e) {
 			log.error("令牌检查失败",e);
 		}
 		return Response.failedResponse("令牌检查失败");
+	}
+	
+	/**
+	 * app端票据校验
+	 * @param ticket
+	 * @return
+	 */
+	@RequestMapping(value="/ticket",method=RequestMethod.GET)
+	public Object ticket(String ticket){
+		if(StringUtils.isBlank(ticket)) {
+			return Response.paramsCheckFailResponse("参数不合法");
+		}
+		try {
+			Object result = tokenService.ticketToken(ticket);
+			return result;
+		} catch (Exception e) {
+			log.error("票据检查失败",e);
+		}
+		return Response.failedResponse("票据检查失败");
 	}
 }
