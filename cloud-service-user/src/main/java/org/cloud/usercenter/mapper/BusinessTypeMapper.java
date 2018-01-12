@@ -1,5 +1,7 @@
 package org.cloud.usercenter.mapper;
 
+import java.util.List;
+
 import org.cloud.usercenter.entity.BusinessType;
 
 public interface BusinessTypeMapper {
@@ -14,4 +16,6 @@ public interface BusinessTypeMapper {
     int updateByPrimaryKeySelective(BusinessType record);
 
     int updateByPrimaryKey(BusinessType record);
+
+	List<BusinessType> queryAll();
 }

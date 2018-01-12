@@ -114,4 +114,13 @@
       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <!-- 自定义 -->
+  <select id="queryAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_type
+  </select>
+  
+  
 </mapper>

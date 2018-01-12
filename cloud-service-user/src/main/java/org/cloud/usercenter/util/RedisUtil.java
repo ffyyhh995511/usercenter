@@ -1,6 +1,7 @@
 package org.cloud.usercenter.util;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.cloud.usercenter.config.BusinessConfig;
@@ -231,7 +232,32 @@ public class RedisUtil {
 		return rs;
 	}
 	
-	
+	/**
+	 * 哈希存储
+	 * @param key
+	 * @param field
+	 * @param value
+	 * @return
+	 */
+	public static String hmset(String key, Map<String, String> hash){
+		String rs = null;
+		Jedis jedis = null;
+		JedisPool jedisPool = null;
+		try{
+			jedisPool = getJedisPool();
+			jedis = jedisPool.getResource();
+			if(jedis != null){
+				rs = jedis.hmset(key, hash);
+			}
+		}catch(Exception e){
+			log.info(e.getMessage(), e);
+		}finally {
+			if(jedis != null){
+				jedis.close();
+			}
+		}
+		return rs;
+	}
 	
 	/**
 	 * 哈希获取
