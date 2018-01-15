@@ -128,16 +128,16 @@ public class RsaUtil {
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);  
             byte[] output = cipher.doFinal(plainTextData);  
             return output;  
-        } catch (NoSuchAlgorithmException e) {  
+        } catch (NoSuchAlgorithmException e) {
             throw new Exception("无此加密算法");  
-        } catch (NoSuchPaddingException e) {  
+        } catch (NoSuchPaddingException e) {
             e.printStackTrace();  
-            return null;  
+            return null;
         } catch (InvalidKeyException e) {  
             throw new Exception("加密公钥非法,请检查");  
-        } catch (IllegalBlockSizeException e) {  
-            throw new Exception("明文长度非法");  
-        } catch (BadPaddingException e) {  
+        } catch (IllegalBlockSizeException e) {
+            throw new Exception("明文长度非法");
+        } catch (BadPaddingException e) {
             throw new Exception("明文数据已损坏");  
         }  
     } 

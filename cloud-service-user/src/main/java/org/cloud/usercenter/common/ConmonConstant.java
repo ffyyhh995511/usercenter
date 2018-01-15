@@ -25,4 +25,6 @@ public class ConmonConstant {
 	 * 缓存key
 	 */
 	public static final String TICKET = "ticket";
+	
+	public static final String AES_KEY = "erJTGS348w!2De!2";
 }

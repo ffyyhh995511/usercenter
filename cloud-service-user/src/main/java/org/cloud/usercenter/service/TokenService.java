@@ -10,6 +10,7 @@ import org.cloud.usercenter.common.ConmonConstant;
 import org.cloud.usercenter.entity.User;
 import org.cloud.usercenter.mapper.UserMapper;
 import org.cloud.usercenter.response.Response;
+import org.cloud.usercenter.util.AESUtils;
 import org.cloud.usercenter.util.RedisUtil;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,8 @@ public class TokenService {
 	 * @throws Exception 
 	 */
 	public Object checkToken(String token) throws Exception {
-		String plainToken = rsaService.decryptionByPrivateKey(token);
+//		String plainToken = rsaService.decryptionByPrivateKey(token);
+		String plainToken = AESUtils.Decrypt(token, ConmonConstant.AES_KEY);
 		String[] items = plainToken.split(intervalSymbol);
 		String uid = items[0];
 		String redisToken = RedisUtil.get(ConmonConstant.USER_TOEKEN + uid);
