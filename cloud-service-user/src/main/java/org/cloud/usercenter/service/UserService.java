@@ -21,7 +21,6 @@ import org.cloud.usercenter.util.ComputerInfoUtil;
 import org.cloud.usercenter.util.MD5Util;
 import org.cloud.usercenter.util.RandomCodeUtil;
 import org.cloud.usercenter.util.RedisUtil;
-import org.cloud.usercenter.util.ServerMacUtil;
 import org.cloud.usercenter.util.SnowflakeIdGenerator;
 import org.springframework.stereotype.Service;
 
@@ -115,24 +114,6 @@ public class UserService {
 	}
 	
 	/**
-	 * 生产web版auth对象
-	 * @param user
-	 * @return
-	 * @throws Exception
-	 */
-	@Deprecated
-	public AuthorizationDto createWebAuth(User user) throws Exception{
-		// 生成token
-		String commonTeken = user.getUid() + "_" + user.getUsername() + "_" + System.currentTimeMillis() + "_";
-		String plainToken = commonTeken + RandomCodeUtil.getUniqueCode(4);
-		String token = rsaService.encryptByPublicKey(plainToken);
-		// web版token过期默认7天
-		long tokenExpire = System.currentTimeMillis() + 24 * 3600 * 7 * 1000L;
-		AuthorizationDto auth = new AuthorizationDto(user.getUid(), user.getUsername(), token, tokenExpire);
-		return auth;
-	}
-	
-	/**
 	 * 生产app版token
 	 * @param user
 	 * @return
@@ -142,13 +123,13 @@ public class UserService {
 		String commonTeken = user.getUid() + "_" + user.getUsername() + "_" + System.currentTimeMillis() + "_";
 		// 生成token
 		String plainToken = commonTeken + RandomCodeUtil.getUniqueCode(4);
-//		String token = rsaService.encryptByPublicKey(plainToken);
+		//String token = rsaService.encryptByPublicKey(plainToken);
 		String token = AESUtils.Encrypt(plainToken,ConmonConstant.AES_KEY);
 		// 生成refreshToken
 		String plainRefreshToken = commonTeken + RandomCodeUtil.getUniqueCode(8);
-//		String refreshToken = rsaService.encryptByPublicKey(plainRefreshToken);
+		//String refreshToken = rsaService.encryptByPublicKey(plainRefreshToken);
 		String refreshToken = AESUtils.Encrypt(plainRefreshToken,ConmonConstant.AES_KEY);
-		// web版token过期默认7天
+		// token过期默认7天
 		long tokenExpire = System.currentTimeMillis() + 24 * 3600 * 7 * 1000L;
 		// refreshToken过期默认30天
 		long resreshTokenExpire = System.currentTimeMillis() + 24 * 3600 * 30 * 1000L;
