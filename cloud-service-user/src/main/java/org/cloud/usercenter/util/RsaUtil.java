@@ -240,7 +240,7 @@ public class RsaUtil {
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(buffer);  
         RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
         // 使用默认RSA
-        Cipher cipher = Cipher.getInstance("RSA");  
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");  
         // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());  
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         byte[] output = cipher.doFinal(plainTextData.getBytes("UTF-8"));  
@@ -262,7 +262,7 @@ public class RsaUtil {
         RSAPrivateKey RSAPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         byte[] encryptByteData = Base64.decodeBase64(encryptData);
         // 使用默认RSA
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());  
         cipher.init(Cipher.DECRYPT_MODE, RSAPrivateKey);
         byte[] output = cipher.doFinal(encryptByteData);
