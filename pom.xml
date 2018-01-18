@@ -58,5 +58,6 @@
 		<module>cloud-service-discovery</module>
 		<module>cloud-service-user</module>
 		<module>cloud-service-user-consumer</module>
+		<module>cloud-service-gateway-zuul</module>
 	</modules>
 </project>
