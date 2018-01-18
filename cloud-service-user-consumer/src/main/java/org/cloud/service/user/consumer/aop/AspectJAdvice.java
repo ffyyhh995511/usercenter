@@ -1,4 +1,4 @@
-package org.cloud.usercenter.aop;
+package org.cloud.service.user.consumer.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,8 +9,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
-
-import com.alibaba.fastjson.JSON;
 
 
 /**
@@ -29,7 +27,7 @@ public class AspectJAdvice {
      * 定义Pointcut，Pointcut的名称为aspectjMethod()，此方法没有返回值和参数
      * 该方法就是一个标识，不进行调用
      */
-    @Pointcut("execution(public * org.cloud.usercenter.controller.*.*(..))")
+    @Pointcut("execution(public * org.cloud.service.user.consumer.controller.*.*(..))")
     private void aspectjMethod() {
     }
     
@@ -61,7 +59,6 @@ public class AspectJAdvice {
         Long end = System.nanoTime() - start;
         Signature sig = pjp.getSignature();
         log.info("接口 {}.{} 运行时间：{} 秒({}纳秒)", sig.getDeclaringTypeName(), sig.getName(),(float) end / 1000000000, end);
-        log.info("接口 {}.{} 返回数据：{}",sig.getDeclaringTypeName(), sig.getName(),JSON.toJSONString(retVal));
         return retVal;
     }
 

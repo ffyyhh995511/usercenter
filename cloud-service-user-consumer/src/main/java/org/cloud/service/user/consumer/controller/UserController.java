@@ -19,9 +19,12 @@ public class UserController {
     @Autowired
     private WebUserService webUserService;
     
+    String appId = "100";
+    String appSecret = "ABST";
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public Object login(User user) {
-    	return webUserService.upLogin(user.getUsername(),user.getPassword());
+    	return webUserService.upLogin(user.getUsername(),user.getPassword(),appId,appSecret);
     }
 }
 

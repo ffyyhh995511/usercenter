@@ -48,15 +48,15 @@ public class RedisUtil {
 		//是否启用后进先出, 默认true
 		config.setLifo(true);
 		//最大空闲连接数, 默认8个
-		config.setMaxIdle(100000);
+		config.setMaxIdle(18);
 		//最大连接数, 默认30个
-		config.setMaxTotal(1000000);
+		config.setMaxTotal(18);
 		//获取连接时的最大等待毫秒数(如果设置为阻塞时BlockWhenExhausted),如果超时就抛异常, 小于零:阻塞不确定的时间,  默认-1
 		config.setMaxWaitMillis(5*1000);
 		//逐出连接的最小空闲时间 默认1800000毫秒(30分钟)
 		config.setMinEvictableIdleTimeMillis(1800000);
 		//最小空闲连接数, 默认0
-		config.setMinIdle(500);
+		config.setMinIdle(10);
 		//每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3
 		config.setNumTestsPerEvictionRun(3);
 		//对象空闲多久后逐出, 当空闲时间>该值 且 空闲连接>最大空闲数 时直接逐出,不再根据MinEvictableIdleTimeMillis判断  (默认逐出策略)   

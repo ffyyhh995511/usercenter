@@ -27,12 +27,11 @@ import lombok.extern.slf4j.Slf4j;
  * @time:2018年1月12日 上午10:44:08
  */
 @Slf4j
-public class RequestInterceptor implements HandlerInterceptor {
+public class AppIdRequestInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
-
 	}
 
 	@Override
