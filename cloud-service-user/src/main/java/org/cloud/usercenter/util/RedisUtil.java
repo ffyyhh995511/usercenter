@@ -60,11 +60,11 @@ public class RedisUtil {
 		//每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3
 		config.setNumTestsPerEvictionRun(3);
 		//对象空闲多久后逐出, 当空闲时间>该值 且 空闲连接>最大空闲数 时直接逐出,不再根据MinEvictableIdleTimeMillis判断  (默认逐出策略)   
-//		config.setSoftMinEvictableIdleTimeMillis(1800000);
+		config.setSoftMinEvictableIdleTimeMillis(1800000);
 		//在获取连接的时候检查有效性, 默认false
-		config.setTestOnBorrow(false);
+		config.setTestOnBorrow(true);
 		//在空闲时检查有效性, 默认false
-		config.setTestWhileIdle(false);
+		config.setTestWhileIdle(true);
 		//逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
 		config.setTimeBetweenEvictionRunsMillis(-1);
 		jedisPool = new JedisPool(config, RDDIS_IP,RDDIS_PORT, 10 * 1000,REDIS_MASTER_AUTH);
