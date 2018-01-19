@@ -58,6 +58,18 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.13</version>
 		</dependency>
+		
+		<!-- 链路跟踪日志 -->
+		<!-- <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency> -->
+		
+		<!-- spring-cloud-starter-zipkin中已经包含了对spring-cloud-starter-sleuth的依赖 -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
 
 	</dependencies>
 </project>
