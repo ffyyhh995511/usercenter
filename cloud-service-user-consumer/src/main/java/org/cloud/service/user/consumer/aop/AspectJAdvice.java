@@ -10,6 +10,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
+import com.alibaba.fastjson.JSON;
+
 
 /**
  *  通用API切面
@@ -43,22 +45,12 @@ public class AspectJAdvice {
     @Around(value = "aspectjMethod()")
     public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
         Long start = System.nanoTime();
-       /* for (Object object : pjp.getArgs()) {
-            if (object instanceof BindingResult) {
-                BindingResult bindingResult = (BindingResult) object;
-                if (bindingResult.hasErrors()) {
-                    String errorMessage = ObjectUtil.checkParams(bindingResult);
-                    log.info("调用接口参数错误：{}", errorMessage);
-                    return Response.failedResponse(errorMessage);
-                }
-            }
-        }*/
-
         //调用核心逻辑
         Object retVal = pjp.proceed();
         Long end = System.nanoTime() - start;
         Signature sig = pjp.getSignature();
         log.info("接口 {}.{} 运行时间：{} 秒({}纳秒)", sig.getDeclaringTypeName(), sig.getName(),(float) end / 1000000000, end);
+        log.info("接口 {}.{} 返回数据：{}",sig.getDeclaringTypeName(), sig.getName(),JSON.toJSONString(retVal));
         return retVal;
     }
 
