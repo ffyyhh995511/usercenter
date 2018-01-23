@@ -1,56 +1,69 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	​
-	<springProperty scope="context" name="springAppName" source="spring.application.name" />
-
-	<!-- Example for logging into the build folder of your project -->
-	<property name="LOG_FILE" value="${BUILD_FOLDER:-build}/${springAppName}" />
-	​
-
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+		
 	<property name="CONSOLE_LOG_PATTERN"
 		value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p})
-            %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+            %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />	
+	
+	<!-- 开发、测试环境 -->
+	<springProfile name="local">
+		
+		<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        	</encoder>
+    	</appender>
+		
+		<root level="info">
+            <appender-ref ref="consoleAppender" />
+        </root>
+	</springProfile>
+	
+	<!-- 生产环境 -->
+	<springProfile name="prod,qa">
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<layout class="ch.qos.logback.classic.PatternLayout">
-			<Pattern>
-				%d{yyyy-MM-dd HH:mm:ss SSS} [%thread] %-5level %logger{36} - %msg%n
-			</Pattern>
-		</layout>
-	</appender>
+		<appender name="fileInfoLog"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+				<level>ERROR</level>
+				<onMatch>DENY</onMatch>
+				<onMismatch>ACCEPT</onMismatch>
+			</filter>
+			<encoder>
+				<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			</encoder>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>/u01/usercenter/log/CloudServiceUserConsumer/info/info.%d.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
 
-	<!-- Appender to log to console -->
-	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<!-- Minimum logging level to be presented in the console logs -->
-			<level>DEBUG</level>
-		</filter>
-		<encoder>
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
-			<charset>utf8</charset>
-		</encoder>
-	</appender>
+		<appender name="fileErrorLog"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>ERROR</level>
+			</filter>
+			<encoder>
+				<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            	<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			</encoder>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>/u01/usercenter/log/CloudServiceUserConsumer/error/error.%d.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
+		
+		<root level="info">
+            <appender-ref ref="fileInfoLog" />
+			<appender-ref ref="fileErrorLog" />
+        </root>
 
-	<!-- Appender to log to file -->
-	​
-	<appender name="flatfile"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_FILE}</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
-			<maxHistory>7</maxHistory>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
-			<charset>utf8</charset>
-		</encoder>
-	</appender>
-	​ ​
-	<root level="INFO">
-		<appender-ref ref="console" />
-		<!-- uncomment this to have also JSON logs -->
-		<!--<appender-ref ref="logstash"/> -->
-		<!--<appender-ref ref="flatfile"/> -->
-	</root>
+		<!-- <logger name="org.cloud.usercenter" level="info">
+			<appender-ref ref="fileInfoLog" />
+			<appender-ref ref="fileErrorLog" />
+		</logger> -->
+		
+	</springProfile>
+
+
 </configuration>
