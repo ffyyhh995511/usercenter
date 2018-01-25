@@ -1,0 +1,12 @@
+1:游览器直接访问服务
+服务IP:服务端口/uri
+
+2:网关默认路由访问服务
+网关IP:网关端口/serviceId/uri
+
+3:网关默认路由访问服务(前缀)
+网关IP:网关端口/前缀/serviceId/uri
+
+#自定义微服务访问路径
+eg: zuul.routes.cloud-service-user = /usercenter/**
+网关IP:网关端口/前缀/usercenter(path)/uri
