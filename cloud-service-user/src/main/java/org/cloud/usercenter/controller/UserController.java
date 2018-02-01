@@ -73,9 +73,12 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/logout",method=RequestMethod.POST)
-	public Object logout(){
+	public Object logout(Long uid){
 		try {
+			Response result = userService.logout(uid);
+			return result;
 		} catch (Exception e) {
 			log.error("退出失败",e);
 		}

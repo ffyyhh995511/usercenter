@@ -137,4 +137,20 @@ public class UserService {
 		return auth;
 	}
 
+	/**
+	 * @param uid
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Response logout(Long uid) {
+		RedisUtil.del(ConmonConstant.USER_TOEKEN + uid);
+		RedisUtil.del(ConmonConstant.USER_REFRESH_TOEKEN + uid);
+		User user = new User();
+		user.setUid(uid);
+		user.setToken(null);
+		user.setRefreshToken(null);
+		userMapper.updateByPrimaryKeySelective(user);
+		return Response.successResponse("退出成功");
+	}
+
 }
