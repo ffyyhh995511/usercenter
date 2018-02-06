@@ -33,7 +33,7 @@ public class CheckController {
 	 * @return
 	 */
 	@RequestMapping(value="/token",method=RequestMethod.GET)
-	public Object check(String token){
+	public Object token(String token){
 		if(StringUtils.isBlank(token)) {
 			return Response.paramsCheckFailResponse("参数不合法");
 		}

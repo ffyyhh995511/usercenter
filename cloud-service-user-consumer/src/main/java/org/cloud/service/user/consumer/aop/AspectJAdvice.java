@@ -49,7 +49,7 @@ public class AspectJAdvice {
         Object retVal = pjp.proceed();
         Long end = System.nanoTime() - start;
         Signature sig = pjp.getSignature();
-        log.info("接口 {}.{} 运行时间：{} 秒({}纳秒)", sig.getDeclaringTypeName(), sig.getName(),(float) end / 1000000000, end);
+        log.info("接口 {}.{} 运行时间：{} 毫秒({}纳秒)", sig.getDeclaringTypeName(), sig.getName(),(float) end / 1000000, end);
         log.info("接口 {}.{} 返回数据：{}",sig.getDeclaringTypeName(), sig.getName(),JSON.toJSONString(retVal));
         return retVal;
     }
