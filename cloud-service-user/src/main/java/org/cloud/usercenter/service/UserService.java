@@ -147,8 +147,8 @@ public class UserService {
 		RedisUtil.del(ConmonConstant.USER_REFRESH_TOEKEN + uid);
 		User user = new User();
 		user.setUid(uid);
-		user.setToken(null);
-		user.setRefreshToken(null);
+		user.setToken("");
+		user.setRefreshToken("");
 		userMapper.updateByPrimaryKeySelective(user);
 		return Response.successResponse("退出成功");
 	}
