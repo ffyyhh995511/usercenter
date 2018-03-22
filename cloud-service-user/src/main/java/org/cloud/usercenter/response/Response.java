@@ -114,4 +114,17 @@ public class Response<T> implements Serializable {
     public static <T> Response<T> interiorErrorResponse() {
         return new Response<T>(null, ResponseEnum.STATUS005.getCode(), ResponseEnum.STATUS005.getMsg());
     }
+
+	/**
+	 * @param errorCode
+	 * @param msg2
+	 * @return
+	 * @Description:TODO
+	 * @author:fangyunhe
+	 * @time:2018年3月22日 下午4:00:50
+	 */
+	public static Response<Exception> interiorErrorResponse(int errorCode, String msg2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
