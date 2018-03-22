@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.cloud.usercenter.exception.handler;
 
 import javax.servlet.http.HttpServletRequest;
