@@ -69,7 +69,7 @@ public class AppIdRequestInterceptor implements HandlerInterceptor {
 	 * @param res
 	 */
 	private void sendErrorResponse(HttpServletResponse res) {
-		Response<String> authResponse = Response.AuthResponse("appId和appSecret校验不通过");
+		Response<String> authResponse = Response.authResponse("appId和appSecret校验不通过");
 		res.setCharacterEncoding("UTF-8");
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter out = null;

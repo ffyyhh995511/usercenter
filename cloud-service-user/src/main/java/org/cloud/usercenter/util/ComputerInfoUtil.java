@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public abstract class ComputerInfoUtil {
+public class ComputerInfoUtil {
 
 	private static String macAddressStr = null;
 	private static String computerName = System.getenv().get("COMPUTERNAME");
@@ -67,7 +67,7 @@ public abstract class ComputerInfoUtil {
 				List<String> macList = getMacAddressList();
 				for (Iterator<String> iter = macList.iterator(); iter.hasNext();) {
 					String amac = iter.next();
-					if (!amac.equals("0000000000E0")) {
+					if (amac != null && !amac.equals("0000000000E0")) {
 						sb.append(amac);
 						break;
 					}

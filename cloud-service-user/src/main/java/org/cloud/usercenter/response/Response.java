@@ -91,19 +91,19 @@ public class Response<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static <T> Response<T> AuthResponse() {
+    public static <T> Response<T> authResponse() {
         return new Response<T>(null, ResponseEnum.STATUS004.getCode(), ResponseEnum.STATUS004.getMsg());
     }
     
-    public static <T> Response<T> AuthResponse(T data) {
+    public static <T> Response<T> authResponse(T data) {
         return new Response<T>(data, ResponseEnum.STATUS004.getCode(), ResponseEnum.STATUS004.getMsg());
     }
     
-    public static <T> Response<T> AuthResponse(String msg) {
+    public static <T> Response<T> authResponse(String msg) {
         return new Response<T>(null, ResponseEnum.STATUS004.getCode(), msg);
     }
     
-    public static <T> Response<T> AuthResponse(T data,String msg) {
+    public static <T> Response<T> authResponse(T data,String msg) {
         return new Response<T>(data, ResponseEnum.STATUS004.getCode(), msg);
     }
     

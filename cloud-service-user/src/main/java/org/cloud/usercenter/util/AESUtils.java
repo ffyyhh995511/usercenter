@@ -33,7 +33,7 @@ public class AESUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static byte[] Encrypt(byte sSrc[], byte sKey[]) throws Exception {
+	public static byte[] encrypt(byte sSrc[], byte sKey[]) throws Exception {
 		if (sKey == null) {
 			log.error("Key为空null");
 			return null;
@@ -59,7 +59,7 @@ public class AESUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static byte[] Decrypt(byte sSrc[], byte sKey[]) {
+	public static byte[] decrypt(byte sSrc[], byte sKey[]) {
 		byte[] original = null;
 		try {
 			// 判断Key是否正确

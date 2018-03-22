@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date 2017年9月7日 下午1:43:47
  * 
  */
-@FeignClient(name = "CLOUD-SERVICE-USER", fallback = WebUserServiceFallback.class)
+@FeignClient(name = "CLOUD-SERVICE-USER", fallback = WebUserServiceFallbackImpl.class)
 public interface WebUserService {
     
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
