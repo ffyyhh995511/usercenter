@@ -1,8 +1,14 @@
 package org.cloud.usercenter.aop;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -63,6 +69,21 @@ public class AspectJAdvice {
         log.info("接口 {}.{} 运行时间：{} 毫秒({}纳秒)", sig.getDeclaringTypeName(), sig.getName(),(float) end / 1000000, end);
         log.info("接口 {}.{} 返回数据：{}",sig.getDeclaringTypeName(), sig.getName(),JSON.toJSONString(retVal));
         return retVal;
+    }
+    
+    /** 
+     * 核心业务逻辑调用异常退出后，执行此Advice，处理错误信息
+     * 注意：执行顺序在Around Advice之后
+     * @param joinPoint
+     * @param ex
+     */  
+    @AfterThrowing(value = "aspectjMethod()", throwing = "ex")    
+    public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
+    	List<Object> list = new ArrayList<Object>();
+        for (int i = 0; i < joinPoint.getArgs().length; i++) {  
+        	list.add(joinPoint.getArgs()[i]);
+        }  
+        log.error("The interface parameter that causes the error:{}",JSON.toJSONString(list));  
     }
 
 }
