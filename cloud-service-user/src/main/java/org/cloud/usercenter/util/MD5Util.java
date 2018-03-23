@@ -27,7 +27,7 @@ public class MD5Util {
 	 * @throws NoSuchAlgorithmException
 	 */
 	public static String encryptionLowerCase(String plain) throws NoSuchAlgorithmException {
-		String re_md5 = new String();
+		String remd5 = new String();
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(plain.getBytes());
 		byte b[] = md.digest();
@@ -43,8 +43,8 @@ public class MD5Util {
 			}
 			buf.append(Integer.toHexString(i));
 		}
-		re_md5 = buf.toString();
-		return re_md5;
+		remd5 = buf.toString();
+		return remd5;
 	}
 
 	/**

@@ -40,7 +40,7 @@ public class TokenService {
 	 */
 	public Object checkToken(String token) throws Exception {
 //		String plainToken = rsaService.decryptionByPrivateKey(token);
-		String plainToken = AESUtils.Decrypt(token, ConmonConstant.AES_KEY);
+		String plainToken = AESUtils.decrypt(token, ConmonConstant.AES_KEY);
 		String[] items = plainToken.split(intervalSymbol);
 		String uid = items[0];
 		String redisToken = RedisUtil.get(ConmonConstant.USER_TOEKEN + uid);

@@ -16,9 +16,9 @@ public class ComputerInfoUtil {
 	private static String macAddressStr = null;
 	private static String computerName = System.getenv().get("COMPUTERNAME");
 
-	private static final String[] windowsCommand = { "ipconfig", "/all" };
-	private static final String[] linuxCommand = { "/sbin/ifconfig", "-a" };
-	private static final Pattern macPattern = Pattern.compile(".*((:?[0-9a-f]{2}[-:]){5}[0-9a-f]{2}).*",
+	private static final String[] WINDOWSCOMMAND = { "ipconfig", "/all" };
+	private static final String[] LINUXCOMMAND = { "/sbin/ifconfig", "-a" };
+	private static final Pattern MACPATTERN = Pattern.compile(".*((:?[0-9a-f]{2}[-:]){5}[0-9a-f]{2}).*",
 			Pattern.CASE_INSENSITIVE);
 
 	/**
@@ -33,9 +33,9 @@ public class ComputerInfoUtil {
 		final String command[];
 
 		if (os.startsWith("Windows")) {
-			command = windowsCommand;
+			command = WINDOWSCOMMAND;
 		} else if (os.startsWith("Linux")) {
-			command = linuxCommand;
+			command = LINUXCOMMAND;
 		} else {
 			throw new IOException("Unknow operating system:" + os);
 		}
@@ -44,7 +44,7 @@ public class ComputerInfoUtil {
 
 		BufferedReader bufReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		for (String line = null; (line = bufReader.readLine()) != null;) {
-			Matcher matcher = macPattern.matcher(line);
+			Matcher matcher = MACPATTERN.matcher(line);
 			if (matcher.matches()) {
 				macAddressList.add(matcher.group(1).replaceAll("-", ":"));
 			}
