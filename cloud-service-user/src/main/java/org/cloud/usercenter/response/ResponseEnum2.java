@@ -11,8 +11,20 @@ package org.cloud.usercenter.response;
  * @version 1.0
  */
 public enum ResponseEnum2 {
+	
+	/**
+	 * 接口请求成功
+	 */
 	STATUS200(200,"接口请求成功"),
+	
+	/**
+	 * 接口请求失败
+	 */
 	STATUS400(400,"接口请求失败"),
+	
+	/**
+	 * 服务异常请稍后重试
+	 */
 	STATUS500(500,"服务异常请稍后重试");
 	
 	ResponseEnum2(){

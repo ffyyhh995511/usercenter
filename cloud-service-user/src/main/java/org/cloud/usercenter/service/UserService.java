@@ -124,11 +124,11 @@ public class UserService {
 		// 生成token
 		String plainToken = commonTeken + RandomCodeUtil.getUniqueCode(4);
 		//String token = rsaService.encryptByPublicKey(plainToken);
-		String token = AESUtils.Encrypt(plainToken,ConmonConstant.AES_KEY);
+		String token = AESUtils.encrypt(plainToken,ConmonConstant.AES_KEY);
 		// 生成refreshToken
 		String plainRefreshToken = commonTeken + RandomCodeUtil.getUniqueCode(8);
 		//String refreshToken = rsaService.encryptByPublicKey(plainRefreshToken);
-		String refreshToken = AESUtils.Encrypt(plainRefreshToken,ConmonConstant.AES_KEY);
+		String refreshToken = AESUtils.encrypt(plainRefreshToken,ConmonConstant.AES_KEY);
 		// token过期默认7天
 		long tokenExpire = System.currentTimeMillis() + 24 * 3600 * 7 * 1000L;
 		// refreshToken过期默认30天

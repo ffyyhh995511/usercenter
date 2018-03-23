@@ -259,12 +259,12 @@ public class RsaUtil {
     	byte[] buffer = decryptBASE64(privateKeyStr);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(buffer);  
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPrivateKey RSAPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+        RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         byte[] encryptByteData = Base64.decodeBase64(encryptData);
         // 使用默认RSA
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         // cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());  
-        cipher.init(Cipher.DECRYPT_MODE, RSAPrivateKey);
+        cipher.init(Cipher.DECRYPT_MODE, rsaPrivateKey);
         byte[] output = cipher.doFinal(encryptByteData);
         String plainTextData = new String(output,"UTF-8");
         return plainTextData;
